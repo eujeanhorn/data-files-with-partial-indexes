@@ -1,0 +1,17 @@
+.vs/
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+*.idx
+*.bin
+
+[Tt]humbs.db
+*~
+.DS_Store
