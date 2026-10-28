@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ArquivosDeIndice
 {
@@ -11,7 +12,7 @@ namespace ArquivosDeIndice
         public int RecordIndex { get; set; }
     }
 
-    internal class IndexManager
+    internal class ProductIndexManager
     {
         private const int BlockSize = 50;
         private const int RecordSize = 100;
@@ -33,11 +34,13 @@ namespace ArquivosDeIndice
                     long currentPosition = fs.Position;
 
                     int productId = br.ReadInt32();
-
-                    fs.Seek(currentPosition + 90, SeekOrigin.Begin);
-                    byte flags = br.ReadByte();
-
-                    fs.Position = currentPosition + RecordSize;
+                    br.ReadInt64();          
+                    br.ReadBytes(38);        
+                    br.ReadBytes(32);        
+                    br.ReadDouble();         
+                    byte flags = br.ReadByte(); 
+                    br.ReadInt64();          
+                    br.ReadByte();            
 
                     bool isDeleted = (flags & 1) != 0;
                     if (isDeleted) continue;
@@ -55,6 +58,8 @@ namespace ArquivosDeIndice
                     validIndexCount++;
                 }
             }
+
+            indexEntries = indexEntries.OrderBy(e => e.ProductId).ToList();
 
             using (var fs = new FileStream(indexFilePath, FileMode.Create, FileAccess.Write))
             using (var bw = new BinaryWriter(fs))

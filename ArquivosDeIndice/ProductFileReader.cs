@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ArquivosDeIndice
 {
-    internal class BinaryFileReader
+    internal class ProductFileReader
     {
         private const int RecordSize = 100;
 

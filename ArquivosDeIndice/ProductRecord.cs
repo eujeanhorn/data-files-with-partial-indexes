@@ -2,7 +2,7 @@
 
 namespace ArquivosDeIndice
 {
-    internal class ProductRecord
+    public class ProductRecord
     {
         public int ProductId { get; set; }
         public long CategoryId { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ArquivosDeIndice
@@ -34,15 +35,18 @@ namespace ArquivosDeIndice
                 {
                     long currentPosition = fs.Position;
 
+                    // Leitura sequencial exata dos 70 bytes do registro de sessão
                     string userSession = Encoding.ASCII.GetString(br.ReadBytes(36)).TrimEnd('\0', ' ');
                     int userId = br.ReadInt32();
+                    br.ReadInt32();          // ProductId
+                    br.ReadBytes(8);         // EventType
+                    br.ReadInt64();          // EventTime
+                    byte flags = br.ReadByte(); // Flags
+                    br.ReadInt64();          // Continuacao
+                    br.ReadByte();           // '\n'
 
-                    fs.Seek(currentPosition + 60, SeekOrigin.Begin);
-                    byte flags = br.ReadByte();
-
-                    fs.Position = currentPosition + RecordSize;
-
-                    if ((flags & 1) != 0) continue;
+                    bool isDeleted = (flags & 1) != 0;
+                    if (isDeleted) continue;
 
                     if (validIndexCount % BlockSize == 0)
                     {
@@ -58,6 +62,9 @@ namespace ArquivosDeIndice
                     validIndexCount++;
                 }
             }
+
+            // Garante que o índice fique ordenado alfabeticamente por UserSession
+            indexEntries = indexEntries.OrderBy(e => e.UserSession).ToList();
 
             using (var fs = new FileStream(indexFilePath, FileMode.Create, FileAccess.Write))
             using (var bw = new BinaryWriter(fs))

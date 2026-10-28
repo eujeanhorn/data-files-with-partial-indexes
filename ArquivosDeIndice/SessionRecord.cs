@@ -2,7 +2,7 @@
 
 namespace ArquivosDeIndice
 {
-    internal class SessionRecord
+    public class SessionRecord
     {
         public string UserSession { get; set; } = string.Empty;
         public int UserId { get; set; }

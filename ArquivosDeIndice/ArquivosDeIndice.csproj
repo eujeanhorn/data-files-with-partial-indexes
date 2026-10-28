@@ -43,14 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryFileReader.cs" />
-    <Compile Include="IndexManager.cs" />
+    <Compile Include="ProductFileReader.cs" />
+    <Compile Include="ProductIndexManager.cs" />
+    <Compile Include="ProductActions.cs" />
     <Compile Include="ProductRecord.cs" />
+    <Compile Include="ProductSearch.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionActions.cs" />
     <Compile Include="SessionFileReader.cs" />
     <Compile Include="SessionIndexManager.cs" />
     <Compile Include="SessionRecord.cs" />
+    <Compile Include="SessionsSearch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
