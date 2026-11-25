@@ -22,6 +22,10 @@ using var userSessionTableReader = new UserSessionsTableReader("C:\\caminho\\use
 
 Os arquivos `.bin` são criados automaticamente se não existirem. O índice parcial de cada tabela é salvo ao lado, com extensão `.idx`.
 
+### Dados iniciais prontos
+
+Se não quiser importar o CSV, baixe o [all_data.zip](https://drive.google.com/file/d/1s9bmy1WA5m5kd2fUQKH7moZmPPZ9-jOx/view). Ele traz um conjunto inicial de dados já gerado nos arquivos `products.bin` e `user_sessions.bin`. Extraia os dois na pasta configurada em `Program.cs` (por exemplo, `C:\caminho\`). Os índices `.idx` são gerados na primeira pesquisa por índice parcial.
+
 ## Compilar e rodar
 
 Na raiz do repositório:
