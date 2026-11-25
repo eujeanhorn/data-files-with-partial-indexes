@@ -11,8 +11,8 @@ public static class Program
 {
     public static void Main()
     {
-        using var productsTableReader = new ProductsTableReader("C:\\Users\\Jean Horn\\Desktop\\user_sessions.bin");
-        using var userSessionTableReader = new UserSessionsTableReader("C:\\Users\\Jean Horn\\Desktop\\products.bin");
+        using var productsTableReader = new ProductsTableReader("C:\\caminho\\products.bin");
+        using var userSessionTableReader = new UserSessionsTableReader("C:\\caminho\\user_sessions.bin");
 
         var productsMenu = ProductsMenu.Create(productsTableReader);
         var userSessionsMenu = UserSessionsMenu.Create(userSessionTableReader);
